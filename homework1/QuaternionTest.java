@@ -82,5 +82,5 @@ public class QuaternionTest {
                 new Quaternion(0, -1, 0, 2.25).toString());
         assertEquals("Quaternion[a=0.0, b=0.0, c=0.0, d=-1.0]",
                 Quaternion.ZERO.minus(Quaternion.K).toString());
-    }
+    } 
 }
