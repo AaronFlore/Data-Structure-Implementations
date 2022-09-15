@@ -1,5 +1,6 @@
+// A record class for creating quaternion objects and performing various quaternion operations.
+
 import java.util.List;
-import java.util.ArrayList;
 
 public record Quaternion(double a, double b, double c, double d) {
 
@@ -48,8 +49,8 @@ public record Quaternion(double a, double b, double c, double d) {
     }
 
     public Quaternion inverse() {
-        double z = a*a + b*b + c*c + d*d;
-        return new Quaternion(a/z, -b/z, -c/z, -d/z);
+        double qSquared = a*a + b*b + c*c + d*d;
+        return new Quaternion(a/qSquared, -b/qSquared, -c/qSquared, -d/qSquared);
     }
     
     public List coefficients() {
