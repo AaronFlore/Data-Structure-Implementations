@@ -170,8 +170,61 @@ public class SimpleLinkedList {
     }
 
     public void reverse() {
-        // Reverse this list
+    if (header != null) {
+ 
+    // Initialize a new head pointer
+    Node new_head = null;
+ 
+    // get pointer to the last node
+    Node last = header.previous;
+ 
+    // set 'curr' to last node
+    Node curr = last, prev;
+ 
+    // traverse list in backward direction
+    while (curr.previous != last)
+    {
+        prev = curr.previous;
+ 
+        // insert 'curr' at the end of the list
+        // starting with the 'new_head' pointer
+        new_head= insertEnd(new_head, curr);
+        curr = prev;
     }
+    new_head=insertEnd(new_head, curr);
+ 
+    // head pointer of the reversed list
+    }
+}
+    static Node insertEnd(Node head, Node new_node)
+{
+    // If the list is empty, create a single node
+    // circular and doubly list
+    if (head == null)
+    {
+        new_node.next = new_node.previous = new_node;
+        head = new_node;
+        return head;
+    }
+ 
+    // If list is not empty
+ 
+    // Find last node /
+    Node last = (head).previous;
+ 
+    // Start is going to be next of new_node
+    new_node.next = head;
+ 
+    // Make new node previous of start
+    (head).previous = new_node;
+ 
+    // Make last previous of new node
+    new_node.previous = last;
+ 
+    // Make new node next of old last
+    last.next = new_node;
+    return head;
+}
 
     public void append(SimpleLinkedList other) {
         //append all the elements of the other list to the end of this list
@@ -206,29 +259,45 @@ public class SimpleLinkedList {
         }
     }
 
-    public static void main(String[] args) {
-
-    // create an object of Queue class
-    var list = new SimpleLinkedList();
-        for (var i = 1; i <= 10; i++) {
-            list.addLast(i);
+    public Object last() {
+        // Return the last element of this list
+        if (size() == 0) {
+            throw new NoSuchElementException("No such element");
         }
-        list.filter(x -> (Integer) x % 5 != 0);
-        list.filter(x -> (Integer) x % 3 != 0);
-        list.filter(x -> (Integer) x != 1);
-        System.out.println(list.size());
-        System.out.println(asString(list));
-        System.out.println(4 >= 8);
-        list.filter(x -> (Integer) x >= 8);
-        System.out.println(list.size());
-        System.out.println(asString(list));
-        // assertEquals(1, list.size());
-
-  }
-  public static String asString(SimpleLinkedList list) {
-        var builder = new StringBuilder();
-        list.forEach(builder::append);
-        return builder.toString();
+        else {
+            return get(size()-1);
+        }
     }
 
+    public Boolean every(Predicate<Object> condition) {
+        Boolean everyElement = true;
+        for (int i = 0; i < size(); i++) {
+            int x = ((Number)get(i)).intValue();
+            System.out.println(x);
+            if (!condition.test(x)) {
+                everyElement = false;
+            }
+        }
+        return everyElement;
+    }
+    
+    public Boolean some(Predicate<Object> condition) {
+        Boolean everyElement = false;
+        for (int i = 0; i < size(); i++) {
+            int x = ((Number)get(i)).intValue();
+            System.out.println(x);
+            if (condition.test(x)) {
+                everyElement = true;
+            }
+        }
+        return everyElement;
+    }
+
+    public static SimpleLinkedList of(int... a) {
+    var list = new SimpleLinkedList();
+    for (int i : a) {
+        list.addLast(i);
+    }
+    return list;
+    }
 }
