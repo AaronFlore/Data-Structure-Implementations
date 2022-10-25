@@ -6,13 +6,9 @@ import java.util.function.UnaryOperator;
 
 /**
  * A simple immutable linked list, implement completely from scratch as a
- * singly-linked structure. There aren't too many operations, as additional will
- * be left for homework.
- * 
- * The implementation uses a sum type because I have major null-phobia. Not
- * going to pay the billion-dollar mistake, not with this one.
+ * singly-linked structure.
  */
-public sealed interface SimpleImmutableList permits EmptyList, ListNode {
+public sealed interface SimpleImmutableList permits EmptyList,ListNode {
     int size();
 
     Object head();
@@ -38,12 +34,12 @@ public sealed interface SimpleImmutableList permits EmptyList, ListNode {
     SimpleImmutableList drop(int n);
 
     SimpleImmutableList take(int n);
-    
+
     SimpleImmutableList reversed();
 
     SimpleImmutableList append(SimpleImmutableList other);
 
-    SimpleImmutableList map(Function <Integer, Integer> f );
+    SimpleImmutableList map(Function<Integer, Integer> f);
 
     SimpleImmutableList filter(Predicate<Object> condition);
 
@@ -81,7 +77,7 @@ final record EmptyList() implements SimpleImmutableList {
         }
         return new EmptyList();
     }
-    
+
     public SimpleImmutableList take(int n) {
         if (size() < n || n < 0) {
             throw new IllegalArgumentException("Argument for number of elements is too large or small");
@@ -96,16 +92,14 @@ final record EmptyList() implements SimpleImmutableList {
     public SimpleImmutableList append(SimpleImmutableList other) {
         if (other.size() == 0) {
             return this;
-        }
-        else if (this.size() == 0) {
+        } else if (this.size() == 0) {
             return other;
-        }
-        else {
-        return new EmptyList();
+        } else {
+            return new EmptyList();
         }
     }
 
-    public SimpleImmutableList map(Function <Integer, Integer> f ) {
+    public SimpleImmutableList map(Function<Integer, Integer> f) {
         return new EmptyList();
     }
 
@@ -141,15 +135,14 @@ final record ListNode(
         tail.forEach(consumer);
     }
 
-
     public SimpleImmutableList take(int n) {
-        // Keep only the first n elements of the list, removing the rest
+        // Returns a new list containing the first n elements of this list
         if (size() < n || n < 0) {
             throw new IllegalArgumentException("Argument for number of elements is too large or small");
         }
         SimpleImmutableList list = new EmptyList();
-        if (n !=0) {
-            for (var i = (n-1); i >= 0; i--) {
+        if (n != 0) {
+            for (var i = (n - 1); i >= 0; i--) {
                 list = new ListNode(at(i), list);
             }
         }
@@ -157,11 +150,12 @@ final record ListNode(
     }
 
     public SimpleImmutableList drop(int n) {
+        // Returns a new list containing all but the first n elements of this list
         if (size() < n || n < 0) {
             throw new IllegalArgumentException("Argument for number of elements is too large or small");
         }
         SimpleImmutableList list = new EmptyList();
-        for (var i = (size() -1); i >= n; i--) {
+        for (var i = (size() - 1); i >= n; i--) {
             list = new ListNode(at(i), list);
         }
         return list;
@@ -170,8 +164,8 @@ final record ListNode(
     public SimpleImmutableList reversed() {
         SimpleImmutableList list = new EmptyList();
         if (size() != 0) {
-        for (var i = 0; i < size(); i++) {
-            list = new ListNode(at(i), list);
+            for (var i = 0; i < size(); i++) {
+                list = new ListNode(at(i), list);
             }
         }
         return list;
@@ -180,35 +174,35 @@ final record ListNode(
     public SimpleImmutableList append(SimpleImmutableList other) {
         SimpleImmutableList list = new EmptyList();
         if (size() != 0) {
-            for (var i = (size()-1); i >= 0; i--) {
+            for (var i = (size() - 1); i >= 0; i--) {
                 list = new ListNode(at(i), list);
-                }
             }
-        if (other.size() !=0) {
-            for (var i = (other.size()-1); i >= 0; i--) {
+        }
+        if (other.size() != 0) {
+            for (var i = (other.size() - 1); i >= 0; i--) {
                 list = new ListNode(other.at(i), list);
-                }
             }
+        }
         return list;
     }
 
-    public SimpleImmutableList map(Function <Integer, Integer> f ) {
+    public SimpleImmutableList map(Function<Integer, Integer> f) {
         // Replace all items x in this list with f(x)
         SimpleImmutableList list = new EmptyList();
         if (size() != 0) {
-            for (var i = (size()-1); i >= 0; i--) {
-                int mappedNumber = ((Number)at(i)).intValue();
-                list = new ListNode(f.apply(mappedNumber), list);
-                }
+            for (var i = (size() - 1); i >= 0; i--) {
+                int mapNumber = ((Number) at(i)).intValue();
+                list = new ListNode(f.apply(mapNumber), list);
             }
+        }
         return list;
     }
 
     public SimpleImmutableList filter(Predicate<Object> condition) {
         SimpleImmutableList list = new EmptyList();
         if (size() != 0) {
-            for (var i = (size()-1); i >= 0; i--) {
-                int checkNumber = ((Number)at(i)).intValue();
+            for (var i = (size() - 1); i >= 0; i--) {
+                int checkNumber = ((Number) at(i)).intValue();
                 if (condition.test(checkNumber)) {
                     list = new ListNode(checkNumber, list);
                 }
@@ -218,10 +212,11 @@ final record ListNode(
     }
 
     public Boolean every(Predicate<Object> condition) {
+        // Return whether every item in this list satisfies predicate p
         Boolean every = true;
         if (size() != 0) {
-            for (var i = (size()-1); i >= 0; i--) {
-                int checkNumber = ((Number)at(i)).intValue();
+            for (var i = (size() - 1); i >= 0; i--) {
+                int checkNumber = ((Number) at(i)).intValue();
                 if (!condition.test(checkNumber)) {
                     every = false;
                 }
@@ -231,10 +226,11 @@ final record ListNode(
     }
 
     public Boolean some(Predicate<Object> condition) {
+        // Return whether at least item in this list satisfies predicate p
         Boolean every = false;
         if (size() != 0) {
-            for (var i = (size()-1); i >= 0; i--) {
-                int checkNumber = ((Number)at(i)).intValue();
+            for (var i = (size() - 1); i >= 0; i--) {
+                int checkNumber = ((Number) at(i)).intValue();
                 if (condition.test(checkNumber)) {
                     every = true;
                 }
@@ -244,8 +240,7 @@ final record ListNode(
     }
 
     public int last() {
-        int lastNumber = ((Number)at(size()-1)).intValue();
-        return(lastNumber);
+        int lastNumber = ((Number) at(size() - 1)).intValue();
+        return (lastNumber);
     }
 }
-
