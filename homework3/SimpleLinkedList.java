@@ -164,9 +164,9 @@ public class SimpleLinkedList {
     public void filter(Predicate<Object> condition) {
         // Keep only the items in this list for which the predicate p holds
         for (int i = 0; i < size(); i++) {
-            int x = ((Number) get(i)).intValue();
-            System.out.println(x);
-            if (!condition.test(x)) {
+            int checkNumber = ((Number) get(i)).intValue();
+            System.out.println(checkNumber);
+            if (!condition.test(checkNumber)) {
                 remove(i);
                 i -= 1;
             }
