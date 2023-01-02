@@ -1,6 +1,3 @@
-Quaternions: Homework 1,
-By: Aaron Floreani
-
 A quaternion class for creating quaternion objects and performing various quaternion mathematical operations, such as:
 addition, subtraction, multiplication, normalization, inversion, and conjugation.
 
