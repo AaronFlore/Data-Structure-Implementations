@@ -1,2 +1,1 @@
-Aaron Floreani & Shaun Seah <br /> Homework 6 <br /> lmu-cmsi-2120 <br /> <br />
 A Java program called WordFinder implemented using a Ternary Search Tree which contains a collection of non-empty, non-blank words, optimized for autocompletion. The program allows for adding words, checking if a word is in the tree, returning all words, and providing suggestions based on a prefix.
