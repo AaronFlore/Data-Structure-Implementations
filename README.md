@@ -1,1 +1,6 @@
-A variety of data structure implementations including ternary search trees, quaternions, stacks, queues, and linked lists.
+# A variety of data structure implementations including:<br />
+Ternary search trees<br />
+Quaternions<br />
+Stacks<br />
+Queues<br />
+Linked lists (immutable and mutable) <br />
