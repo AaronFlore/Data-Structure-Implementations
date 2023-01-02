@@ -1,1 +1,1 @@
-A variety of data structures implemented from scratch.
+A variety of data structure implementations
