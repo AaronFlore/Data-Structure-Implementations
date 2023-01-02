@@ -1,4 +1,8 @@
  This interface contains the following variety of functions:  <br />
- A recursive mathematical function a(x, y), a decimal to binary function, returning the largest integer less than log3(n), and x^n power function. <br /><br />
- These methods would not ordinarily be written recursively, but I am writing them recursively for practice.
- In addition to these recursive functions there are also functions that: <br /> create a power set from a given set and returns a list of multiples from a given set.
+ A recursive mathematical function for a(x, y)<br />
+ A decimal to binary function<br />
+ Returning the largest integer less than log3(n)<br />
+ A x^n power function<br />
+ A function to create a power set from a given set and returns a list of multiples from a given set.
+ <br /><br />
+ Please note: these methods would not ordinarily be written recursively, but I am writing them recursively for practice.
