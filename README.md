@@ -1,2 +1,1 @@
-# lmu-cmsi-2120
-My Homework for Data Structures
+A variety of data structures implemented from scratch.
