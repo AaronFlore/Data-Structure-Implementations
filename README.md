@@ -1,4 +1,4 @@
-# A variety of data structure implementations including:<br />
+# Data Structure Implementations:<br />
 Ternary search trees<br />
 Quaternions<br />
 Stacks<br />
